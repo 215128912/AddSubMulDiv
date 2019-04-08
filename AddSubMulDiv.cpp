@@ -1,13 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 int numProblems;
-const int maxn=100000;
 struct problem
 {
     int num1,num2,num3;
     int op1,op2;
     int ans;
-}WA[maxn];
+};
 int cal(int x,int op,int y)
 {
     if(op==0) return x+y;
@@ -19,8 +18,8 @@ void output(int op)
 {
     if(op==0) printf(" + ");
     if(op==1) printf(" - ");
-    if(op==2) printf(" ¡Á ");
-    if(op==3) printf(" ¡Â ");
+    if(op==2) printf(" * ");
+    if(op==3) printf(" / ");
     if(op==4) printf(" = \n");
 }
 void outputProblem(problem *p)
@@ -58,25 +57,13 @@ int main()
     printf("Please enter the number of problems:");
     scanf("%d",&numProblems);
     int nownum=0;problem nowp;
-    int WANum=0;
     while(nownum<numProblems)
     {
         get_problem(&nowp);
         nowp.ans=check(nowp);
         if(nowp.ans<0) continue;
         outputProblem(&nowp);
-        int myans;
-        printf("Please input your answer:");scanf("%d",&myans);
-        if(myans==nowp.ans) printf("correct!\n");
-        else
-        {
-            printf("Wrong Answer!\n");
-            WA[WANum++]=nowp;
-        }
         nownum++;
     }
-    printf("Test finished!Your correct percent is %.2f%%\n",(numProblems-WANum)*100/(double)numProblems);
-    printf("Your wrong problem list:\n");
-    for(int i=0;i<WANum;i++) outputProblem(&WA[i]);
     return 0;
 }
